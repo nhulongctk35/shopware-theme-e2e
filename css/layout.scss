@@ -67,3 +67,41 @@
 .reveal .justify-start { justify-content: flex-start; }
 .reveal .justify-center { justify-content: center; }
 .reveal .justify-end { justify-content: flex-end; }
+
+.reveal footer {
+    display: block;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(80, 97, 233, 1) 0%, rgba(115, 89, 171, 1) 100%);
+	padding: 10px;
+	height: 25px;
+	font-size: 18px;
+	z-index: 9;
+}
+
+.reveal footer .left, 
+.reveal footer .right {
+	position: absolute;
+	top: 14px;
+}
+
+.reveal footer .left {
+	left: 20px;
+}
+
+.reveal footer .right {
+	right: 20px;
+}
+
+.reveal footer .center {
+	text-align: center;
+}
+
+.reveal footer.minimal .logo {
+    max-height: 30px;
+    margin-top: -4px;
+}
