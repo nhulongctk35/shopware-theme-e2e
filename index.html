@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>E2E and Visual Testing in Shopware 6</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			.col-2 {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.reveal pre {
+				width: 100%;
+			}
+
+			.reveal pre code {
+				max-height: unset;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-transition="slide">
+					<h2>Apply E2E and Visual Testing in Shopware 6</h2>
+				</section>
+
+				<section>
+					<section data-transition="convex-in fade-out">
+						<h3>About Us</h3>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<img src="assets/team-members.png">
+					</section>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li class="fragment fade-in-then-semi-out"><span>The Problems</span></li>
+						<li class="fragment fade-in-then-semi-out"><span>Why Cypress?</span></li>
+						<li class="fragment fade-in-then-semi-out"><span>Why Percy?</span></li>
+						<li class="fragment fade-in-then-semi-out"><span>Best Practices</span></li>
+						<li class="fragment fade-in-then-semi-out"><span>Feedbacks/Questions</span></li>
+				</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>The Problems!</h2>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>we have monthly release</h3>
+						<img src="assets/check-release.png">
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>we usually update code</h3>
+						<div class="col-2">
+							<img src="assets/css-old.png" alt="">
+							<img src="assets/css-new.png" alt="">
+						</div>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>we add new features</h3>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>and we dont want unexpected changes</h3>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>so we check all pages</h3>
+					</section>
+
+					<section data-transition="convex-in fade-out">
+						<h3>time consuming!</h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Why Cypress?</h3>
+						<ul>
+							<li class="fragment fade-in-then-semi-out">Give us confidence</li>
+							<li class="fragment fade-in-then-semi-out">Easy to use, especially you are developers</li>
+							<li class="fragment fade-in-then-semi-out">Simple to setup</li>
+							<li class="fragment fade-in-then-semi-out">Built on top of Mocha and Chai</li>
+							<li class="fragment fade-in-then-semi-out">Cypress Has Debugging Capabilities</li>
+							<li class="fragment fade-in-then-semi-out">Well-documented and easy to understand</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>What Cypress cannot do</h3>
+						<ul>
+							<li>Doesnt support cross browser testing (only Chrome and Electon from now)</li>
+							<li>Doesnt support iFrame</li>
+							<li>Cross-domain testing</li>
+							<li>Open multiple tabs</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Our test structure</h3>
+						<img src="assets/e2e-structure.png">
+					</section>
+
+					<section>
+						<h3>Fixtures</h3>
+						<div class="col-2">
+							<img src="assets/fixture.png">
+							<pre data-id="code">
+								<code data-line-numbers class="hljs json" data-trim>
+									{
+										"addresses": [
+											{
+												"firstName": "Pep",
+												"lastName": "Eroni",
+												"street": "Ebbinghoff 10",
+												"zipcode": "48624",
+												"city": "Schöppingen"
+											}
+										]
+									}		
+								</code>
+							</pre>
+						</div>
+					</section>
+
+					<section>
+						<h3>Integration</h3>
+						<pre data-id="code">
+							<code data-line-numbers class="hljs javascript" data-trim>
+								describe('Account login', () => {
+									beforeEach(() => {...});
+							
+									it('@visual: check appearance of login with wrong credentials', () => {
+											cy.get('.account-menu [type="button"]').click();
+											cy.get('.account-menu-dropdown').should('be.visible');
+							
+											cy.get('.account-menu-login-button').click();
+											accountPage.login();
+							
+											cy.get('.account-welcome h1').should((element) => {
+												expect(element).to.contain('Overview');
+											});
+
+											cy.takeSnapshot('[Account] Login', '.account');
+									});
+								});
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h3>Plugins</h3>
+						<pre data-id="code">
+							<code data-line-numbers class="hljs javascript" data-trim>
+								// This function is called when a project is opened or re-opened
+								// (e.g. due to the project's config changing)
+
+								require('@babel/register');
+								
+								const selectTestsWithGrep = require('cypress-select-tests/grep');
+									
+								module.exports = (on, config) => {
+									on('file:preprocessor', selectTestsWithGrep(config));
+								};
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h3>Support</h3>
+						<pre data-id="code">
+							<code data-line-numbers class="hljs javascript" data-trim>
+								/**
+									* Takes a snapshot for percy visual testing
+									* @memberOf Cypress.Chainable#
+									* @name takeSnapshot
+									* @param {String} title - Title of the screenshot
+									* @param {String} [selectorToCheck = null] - Unique selector to make sure the module is ready for being snapshot
+									* @param {Object} [width = {widths: [375, 768, 1920]}] - Screen width used for snapshot
+									* @function
+									*/
+									Cypress.Commands.add('takeSnapshot', (title, selectorToCheck = null, width = {widths: [375, 768, 1920]}) => {
+										if (!width) {
+												cy.percySnapshot(title);
+												return;
+										}
+										cy.percySnapshot(title, width);
+									});
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h3>Support</h3>
+						<img src="assets/shopware-test-suites.png" alt="">
+						<br>
+						<a style="font-size: 14px;" href="https://github.com/shopware/e2e-testsuite-platform" target="_blank">E2E Platform Testsuite for Shopware 6</a>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Why Percy?</h2>
+					</section>
+
+					<section>
+						<h2>Screenshots comparision</h2>
+						<img src="assets/percy-change.png" alt="">
+					</section>
+
+					<section>
+						<h2>Screenshots comparision</h2>
+						<img src="assets/percy-nochange.png" alt="">
+					</section>
+					
+				</section>
+
+				<section>
+					<h2>Best Practices</h2>
+					<ul>
+						<li>
+							<a href="https://docs.cypress.io/guides/references/best-practices">Cypress Docs</a>
+						</li>
+						<li>
+							<a href="https://developer.shopware.com/docs/resources/guidelines/testing/e2e-best-practises#cypress-commands-and-their-queue">Shopware Best practises on writing end-to-end tests</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Feedbacks / Questions</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
