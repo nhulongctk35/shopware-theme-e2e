@@ -143,6 +143,9 @@
       <h3>Integration</h3>
       <pre data-id="code">
 							<code data-line-numbers class="hljs javascript" data-trim>
+								import AccountPageObject from 'support/pages/account.page-object';
+								const accountPage = new AccountPageObject();
+
 								describe('Account login', () => {
 									beforeEach(() => {...});
 							
@@ -179,7 +182,12 @@
 									on('file:preprocessor', selectTestsWithGrep(config));
 								};
 							</code>
-						</pre>
+			</pre>
+			<aside class="notes">
+				- Plugins enable you to modify, or extend the internal behavior of Cypress.
+				- Plugins allow you to write your own custom code that executes during particular stages of the Cypress lifecycle.
+				- The event file:preprocessor is used to customize how your test code is transpiled and sent to the browse
+			</aside>
      </section>
 
      <section>
