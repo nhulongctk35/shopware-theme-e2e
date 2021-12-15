@@ -1,132 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<title>E2E and Visual Testing in Shopware 6</title>
+  <title>E2E and Visual Testing in Shopware 6</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<style>
-			.col-2 {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-			}
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <style>
+   .col-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+   }
 
-			.reveal pre {
-				width: 100%;
-			}
+   .reveal pre {
+    width: 100%;
+   }
 
-			.reveal pre code {
-				max-height: unset;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<footer class="minimal">
-				<div class="left">
-					E2E and Visual Testing in Shopware 6
-				</div>
-				<div class="center">
-					<img class="logo" src="assets/sw6-logo.svg" alt="Shopware Logo">
-				</div>
-				<div class="right">
-					@Slice&amp;Dice
-				</div>
-			</footer>
-			<div class="slides">
-				<section data-background-transition="slide">
-					<h2>Apply E2E and Visual Testing in Shopware 6</h2>
-				</section>
+   .reveal pre code {
+    max-height: unset;
+   }
+  </style>
+ </head>
+ <body>
+  <div class="reveal">
+   <footer class="minimal">
+    <div class="left">E2E and Visual Testing in Shopware 6</div>
+    <div class="center">
+     <img class="logo" src="assets/sw6-logo.svg" alt="Shopware Logo" />
+    </div>
+    <div class="right">@Slice&amp;Dice</div>
+   </footer>
+   <div class="slides">
+    <section data-background-transition="slide">
+     <h2>Apply E2E and Visual Testing in Shopware 6</h2>
+    </section>
 
-				<section>
-					<section data-transition="convex-in fade-out">
-						<h3>About Us</h3>
-					</section>
+    <section>
+     <section data-transition="convex-in fade-out">
+      <h3>About Us</h3>
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<img src="assets/team-members.png">
-					</section>
+     <section data-transition="convex-in fade-out">
+      <img src="assets/team-members.png" />
+     </section>
 
-					<section data-background-transition="slide" data-background="assets/themes.jpeg">
-					</section>
-				</section>
+     <section data-background-transition="slide" data-background="assets/themes.jpeg"></section>
+    </section>
 
-				<section>
-					<h2>Agenda</h2>
-					<ul>
-						<li class="fragment fade-in-then-semi-out"><span>The Challenges</span></li>
-						<li class="fragment fade-in-then-semi-out"><span>Why Cypress?</span></li>
-						<li class="fragment fade-in-then-semi-out"><span>Why Percy?</span></li>
-						<li class="fragment fade-in-then-semi-out"><span>Best Practices</span></li>
-						<li class="fragment fade-in-then-semi-out"><span>Feedbacks/Questions</span></li>
-				</ul>
-				</section>
+    <section>
+     <h2>Agenda</h2>
+     <ul>
+      <li class="fragment fade-in-then-semi-out"><span>The Challenges</span></li>
+      <li class="fragment fade-in-then-semi-out"><span>Why Cypress?</span></li>
+      <li class="fragment fade-in-then-semi-out"><span>Why Percy?</span></li>
+      <li class="fragment fade-in-then-semi-out"><span>Best Practices</span></li>
+      <li class="fragment fade-in-then-semi-out"><span>Feedbacks/Questions</span></li>
+     </ul>
+    </section>
 
-				<section>
-					<section>
-						<h2>The Challenges!</h2>
-					</section>
+    <section>
+     <section>
+      <h2>The Challenges!</h2>
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<h3>we have monthly release</h3>
-						<img src="assets/check-release.png">
-					</section>
+     <section data-transition="convex-in fade-out">
+      <h3>we have monthly release</h3>
+      <img src="assets/check-release.png" />
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<h3>we usually update code</h3>
-						<div class="col-2">
-							<img src="assets/css-old.png" alt="">
-							<img src="assets/css-new.png" alt="">
-						</div>
-					</section>
+     <section data-transition="convex-in fade-out">
+      <h3>we usually update code</h3>
+      <div class="col-2">
+       <img src="assets/css-old.png" alt="" />
+       <img src="assets/css-new.png" alt="" />
+      </div>
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<h3>and we dont want unexpected changes</h3>
-						<img src="assets/unexpected-changes.gif" alt="unexpected changes" />
-					</section>
+     <section data-transition="convex-in fade-out">
+      <h3>and we dont want unexpected changes</h3>
+      <img src="assets/unexpected-changes.gif" alt="unexpected changes" />
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<h3>so we check all pages</h3>
-						<img src="assets/check-all-page.gif" alt="we check all pages" />
-					</section>
+     <section data-transition="convex-in fade-out">
+      <h3>so we check all pages</h3>
+      <img src="assets/check-all-page.gif" alt="we check all pages" />
+     </section>
 
-					<section data-transition="convex-in fade-out">
-						<h3>time consuming!</h3>
-						<img src="assets/time-consuming.gif" alt="Time Consuming" />
-					</section>
-				</section>
+     <section data-transition="convex-in fade-out">
+      <h3>time consuming!</h3>
+      <img src="assets/time-consuming.gif" alt="Time Consuming" />
+     </section>
+    </section>
 
-				<section>
-					<section>
-						<h3>Why Cypress?</h3>
-						<ul>
-							<li class="fragment fade-in-then-semi-out">Easy to use, especially you are developers</li>
-							<li class="fragment fade-in-then-semi-out">Simple to setup</li>
-							<li class="fragment fade-in-then-semi-out">Built on top of Mocha and Chai</li>
-							<li class="fragment fade-in-then-semi-out">Cypress Has Debugging Capabilities</li>
-							<li class="fragment fade-in-then-semi-out">Well-documented and easy to understand</li>
-						</ul>
-					</section>
-				</section>
+    <section>
+     <section>
+      <h3>Why Cypress?</h3>
+      <ul>
+       <li class="fragment fade-in-then-semi-out">Easy to use, especially you are developers</li>
+       <li class="fragment fade-in-then-semi-out">Simple to setup</li>
+       <li class="fragment fade-in-then-semi-out">Built on top of Mocha and Chai</li>
+       <li class="fragment fade-in-then-semi-out">Cypress Has Debugging Capabilities</li>
+       <li class="fragment fade-in-then-semi-out">Well-documented and easy to understand</li>
+      </ul>
+     </section>
+    </section>
 
-				<section>
-					<section>
-						<h3>Our test structure</h3>
-						<img src="assets/e2e-structure.png">
-					</section>
+    <section>
+     <section>
+      <h3>Our test structure</h3>
+      <img src="assets/e2e-structure.png" />
+     </section>
 
-					<section>
-						<h3>Fixtures</h3>
-						<div class="col-2">
-							<img src="assets/fixture.png">
-							<pre data-id="code">
+     <section>
+      <h3>Fixtures</h3>
+      <div class="col-2">
+       <img src="assets/fixture.png" />
+       <pre data-id="code">
 								<code data-line-numbers class="hljs json" data-trim>
 									{
 										"addresses": [
@@ -141,12 +136,12 @@
 									}		
 								</code>
 							</pre>
-						</div>
-					</section>
+      </div>
+     </section>
 
-					<section>
-						<h3>Integration</h3>
-						<pre data-id="code">
+     <section>
+      <h3>Integration</h3>
+      <pre data-id="code">
 							<code data-line-numbers class="hljs javascript" data-trim>
 								describe('Account login', () => {
 									beforeEach(() => {...});
@@ -167,11 +162,11 @@
 								});
 							</code>
 						</pre>
-					</section>
+     </section>
 
-					<section>
-						<h3>Plugins</h3>
-						<pre data-id="code">
+     <section>
+      <h3>Plugins</h3>
+      <pre data-id="code">
 							<code data-line-numbers class="hljs javascript" data-trim>
 								// This function is called when a project is opened or re-opened
 								// (e.g. due to the project's config changing)
@@ -185,11 +180,11 @@
 								};
 							</code>
 						</pre>
-					</section>
+     </section>
 
-					<section>
-						<h3>Support</h3>
-						<pre data-id="code">
+     <section>
+      <h3>Support</h3>
+      <pre data-id="code">
 							<code data-line-numbers class="hljs javascript" data-trim>
 								/**
 									* Takes a snapshot for percy visual testing
@@ -209,66 +204,88 @@
 									});
 							</code>
 						</pre>
-					</section>
+     </section>
 
-					<section>
-						<h3>Support</h3>
-						<img src="assets/shopware-test-suites.png" alt="">
-						<br>
-						<a style="font-size: 14px;" href="https://github.com/shopware/e2e-testsuite-platform" target="_blank">E2E Platform Testsuite for Shopware 6</a>
-					</section>
+     <section>
+      <h3>Support</h3>
+      <img src="assets/shopware-test-suites.png" alt="" />
+      <br />
+      <a style="font-size: 14px" href="https://github.com/shopware/e2e-testsuite-platform" target="_blank"
+       >E2E Platform Testsuite for Shopware 6</a
+      >
+     </section>
+    </section>
 
-				</section>
+    <section>
+     <section>
+      <h2>Why <span style="color: #9e66bf">Percy?</span></h2>
+     </section>
 
-				<section>
-					<section>
-						<h2>Why Percy?</h2>
-					</section>
+     <section style="text-align: left">
+      <div class="fragment" style="display: flex; gap: 20px">
+       <img src="assets/checked.svg" style="width: 60px; height: 60px; margin-top: 16px" alt="" />
+       <p style="font-weight: bold">Automated process of detecting and reviewing visual UI changes.</p>
+      </div>
+      <img src="assets/differ.gif" alt="" />
+     </section>
 
-					<section>
-						<h2>Screenshots comparision</h2>
-						<img src="assets/percy-change.png" alt="">
-					</section>
+     <section style="text-align: center">
+      <div class="fragment" style="display: flex; gap: 20px">
+       <img src="assets/checked.svg" style="width: 60px; height: 60px; margin-top: 16px" alt="" />
+       <p style="font-weight: bold; text-align: left">
+        Protect against visual regressions and bugs across browsers and responsive widths.
+       </p>
+      </div>
+      <img style="height: 200px" src="assets/browsers.png" alt="" />
+      <img src="assets/responsive-width.gif" alt="" />
+     </section>
 
-					<section>
-						<h2>Screenshots comparision</h2>
-						<img src="assets/percy-nochange.png" alt="">
-					</section>
-					
-				</section>
+     <section style="text-align: center">
+      <div class="fragment" style="display: flex; gap: 20px; justify-content: flex-start">
+       <img src="assets/checked.svg" style="width: 60px; height: 60px; margin-top: 16px" alt="" />
+       <p style="font-weight: bold">
+        Get started with visual testing for <span style="font-weight: bold; color: #0e8a09">FREE</span>
+       </p>
+      </div>
+      <img style="max-height: 600px" src="assets/percy-pricing.png" alt="" />
+     </section>
+    </section>
 
-				<section>
-					<h2>Best Practices</h2>
-					<ul>
-						<li>
-							<a href="https://docs.cypress.io/guides/references/best-practices">Cypress Docs</a>
-						</li>
-						<li>
-							<a href="https://developer.shopware.com/docs/resources/guidelines/testing/e2e-best-practises#cypress-commands-and-their-queue">Shopware Best practises on writing end-to-end tests</a>
-						</li>
-					</ul>
-				</section>
+    <section>
+     <h2>Best Practices</h2>
+     <ul>
+      <li>
+       <a href="https://docs.cypress.io/guides/references/best-practices">Cypress Docs</a>
+      </li>
+      <li>
+       <a
+        href="https://developer.shopware.com/docs/resources/guidelines/testing/e2e-best-practises#cypress-commands-and-their-queue"
+        >Shopware Best practises on writing end-to-end tests</a
+       >
+      </li>
+     </ul>
+    </section>
 
-				<section>
-					<h2>Feedbacks / Questions</h2>
-				</section>
-			</div>
-		</div>
+    <section>
+     <h2>Feedbacks / Questions</h2>
+    </section>
+   </div>
+  </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+   // More info about initialization & config:
+   // - https://revealjs.com/initialization/
+   // - https://revealjs.com/config/
+   Reveal.initialize({
+    hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+   });
+  </script>
+ </body>
 </html>
